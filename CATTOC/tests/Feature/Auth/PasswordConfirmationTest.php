@@ -1,0 +1,26 @@
+<?php
+
+namespace Tests\Feature\Auth;
+
+use App\Models\TaiKhoan;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class PasswordConfirmationTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_confirm_password_screen_can_be_rendered(): void
+    {
+        $user = TaiKhoan::factory()->create();
+        $this->actingAs($user)->get('/confirm-password')->assertStatus(200);
+    }
+
+    public function test_password_can_be_confirmed(): void
+    {
+        $user = TaiKhoan::factory()->create();
+        $this->actingAs($user)->post('/confirm-password', ['password' => 'password'])
+            ->assertRedirect()
+            ->assertSessionHasNoErrors();
+    }
+}

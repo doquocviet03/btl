@@ -1,0 +1,2 @@
+<footer class="px-8 py-5 text-center text-xs font-bold text-slate-400">© <?php echo e(date('Y')); ?> Barber House Admin. MVC • Blade • Tailwind • Alpine.js</footer>
+<?php /**PATH D:\STUDY\Laravel\BARBER\CATTOC\resources\views/admin/layouts/footer.blade.php ENDPATH**/ ?>

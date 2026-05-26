@@ -1,0 +1,5 @@
+@csrf
+<div><label class="block text-sm font-semibold mb-1">Số sao</label><input type="number" min="1" max="5" name="so_sao" value="{{ old('so_sao', $danhGia->so_sao ?? 5) }}" class="w-full rounded-xl border-slate-300" required></div>
+<div><label class="block text-sm font-semibold mb-1">Nội dung</label><textarea name="noi_dung" rows="5" class="w-full rounded-xl border-slate-300">{{ old('noi_dung', $danhGia->noi_dung ?? '') }}</textarea></div>
+<div><label class="block text-sm font-semibold mb-1">Trạng thái</label><select name="trang_thai" class="w-full rounded-xl border-slate-300"><option value="cho_duyet" @selected(old('trang_thai', $danhGia->trang_thai ?? '')=='cho_duyet')>Chờ duyệt</option><option value="da_duyet" @selected(old('trang_thai', $danhGia->trang_thai ?? '')=='da_duyet')>Đã duyệt</option><option value="an" @selected(old('trang_thai', $danhGia->trang_thai ?? '')=='an')>Ẩn</option></select></div>
+<div class="flex justify-end gap-3 pt-4"><a href="{{ route('admin.danh-gia.index') }}" class="px-4 py-2 rounded-xl border">Quay lại</a><button class="px-5 py-2 rounded-xl bg-slate-900 text-white">Lưu</button></div>

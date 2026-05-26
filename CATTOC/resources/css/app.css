@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+|--------------------------------------------------------------------------
+| Barber House – Dark Jelly / Neon Agency UI
+|--------------------------------------------------------------------------
+| Concept bám theo ảnh mẫu: nền đen sâu, glow tím/đỏ/cam, card kính,
+| pill navigation, typography lớn, layout agency cao cấp.
+| Chỉ thay giao diện, không đổi route/controller/biến Blade.
+*/
+@layer base {
+    :root {
+        --bh-bg: #030305;
+        --bh-panel: rgba(255,255,255,.075);
+        --bh-panel-strong: rgba(255,255,255,.12);
+        --bh-line: rgba(255,255,255,.14);
+        --bh-text: #f8fafc;
+        --bh-muted: #a1a1aa;
+        --bh-red: #ff3535;
+        --bh-orange: #ff6a2a;
+        --bh-purple: #b72bff;
+        --bh-pink: #ff4bd8;
+        --font-main: "Inter", "Be Vietnam Pro", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+        font-family: var(--font-main);
+        color: var(--bh-text);
+        background:
+            radial-gradient(circle at 18% 6%, rgba(183,43,255,.2), transparent 26rem),
+            radial-gradient(circle at 86% 18%, rgba(255,53,53,.16), transparent 22rem),
+            radial-gradient(circle at 60% 92%, rgba(255,106,42,.08), transparent 28rem),
+            var(--bh-bg);
+    }
+
+    ::selection { background: rgba(183,43,255,.45); color: #fff; }
+
+    input, select, textarea { color-scheme: dark; }
+}
+
+@layer components {
+    .bh-container { @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8; }
+
+    .bh-site-shell {
+        min-height: 100vh;
+        background:
+            linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+        background-size: 46px 46px;
+    }
+
+    .bh-noise {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        opacity: .38;
+        background:
+            radial-gradient(circle at 20% 20%, rgba(255,255,255,.08) 0 1px, transparent 1px),
+            radial-gradient(circle at 70% 30%, rgba(255,255,255,.06) 0 1px, transparent 1px);
+        background-size: 19px 19px, 31px 31px;
+        mask-image: linear-gradient(to bottom, #000, transparent 88%);
+    }
+
+    .bh-card, .glass {
+        @apply rounded-[2rem] border backdrop-blur-2xl;
+        border-color: var(--bh-line);
+        background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.045));
+        box-shadow: 0 26px 80px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.1);
+    }
+
+    .bh-card-soft {
+        @apply rounded-[1.75rem] border backdrop-blur-2xl;
+        border-color: var(--bh-line);
+        background: rgba(255,255,255,.08);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    }
+
+    .bh-dark-card, .dark-glass {
+        @apply rounded-[2rem] border text-white backdrop-blur-2xl;
+        border-color: rgba(255,255,255,.14);
+        background: linear-gradient(145deg, rgba(18,18,24,.94), rgba(8,8,12,.82));
+        box-shadow: 0 28px 90px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.1);
+    }
+
+    .bh-hero-card {
+        @apply relative overflow-hidden rounded-[2.4rem] border px-5 py-6 sm:px-8 lg:px-10;
+        min-height: calc(100vh - 8.5rem);
+        border-color: rgba(255,255,255,.16);
+        background:
+            radial-gradient(circle at 58% 28%, rgba(183,43,255,.36), transparent 20rem),
+            radial-gradient(circle at 72% 20%, rgba(255,53,53,.24), transparent 18rem),
+            linear-gradient(135deg, rgba(255,255,255,.1), rgba(255,255,255,.035));
+        box-shadow: 0 36px 110px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.12);
+    }
+
+    .bh-section-dark {
+        @apply relative overflow-hidden rounded-[2.4rem] border;
+        border-color: rgba(255,255,255,.12);
+        background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+    }
+
+    .bh-eyebrow {
+        @apply inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] font-black uppercase tracking-[.26em];
+        color: #fff;
+        border-color: rgba(255,255,255,.14);
+        background: rgba(255,255,255,.075);
+    }
+
+    .bh-eyebrow::before {
+        content: "";
+        width: .42rem;
+        height: .42rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--bh-red), var(--bh-purple));
+        box-shadow: 0 0 20px rgba(255,53,53,.85);
+    }
+
+    .bh-title { @apply text-3xl font-black tracking-[-.055em] text-white md:text-5xl; }
+    .bh-section-title, .section-title {
+        @apply text-5xl font-black leading-[.88] tracking-[-.08em] text-white md:text-7xl lg:text-8xl;
+    }
+
+    .bh-muted { @apply text-base leading-relaxed text-zinc-400; }
+
+    .bh-gradient-text {
+        background: linear-gradient(95deg, #fff 0%, #ff4bd8 42%, #ff3535 68%, #ff8a2a 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .bh-btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-black transition duration-300 focus:outline-none focus:ring-4;
+        focus-ring-color: rgba(255,53,53,.25);
+    }
+
+    .bh-btn-primary {
+        @apply bh-btn text-white;
+        background: linear-gradient(135deg, var(--bh-red), var(--bh-orange));
+        box-shadow: 0 16px 42px rgba(255,53,53,.24);
+    }
+    .bh-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 60px rgba(255,53,53,.34); }
+
+    .bh-btn-dark {
+        @apply bh-btn text-white;
+        background: rgba(255,255,255,.1);
+        border: 1px solid rgba(255,255,255,.16);
+    }
+    .bh-btn-dark:hover { background: rgba(255,255,255,.18); transform: translateY(-2px); }
+
+    .bh-btn-light {
+        @apply bh-btn text-white;
+        background: rgba(255,255,255,.075);
+        border: 1px solid rgba(255,255,255,.14);
+    }
+    .bh-btn-light:hover { background: rgba(255,255,255,.16); transform: translateY(-2px); }
+
+    .bh-input, .soft-input {
+        @apply w-full rounded-2xl px-4 py-3 text-sm font-semibold outline-none transition;
+        color: #fff;
+        border: 1px solid rgba(255,255,255,.14);
+        background: rgba(255,255,255,.075);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .bh-input::placeholder, .soft-input::placeholder { color: rgba(244,244,245,.48); }
+    .bh-input:focus, .soft-input:focus { border-color: rgba(255,53,53,.65); box-shadow: 0 0 0 4px rgba(255,53,53,.12); }
+    .bh-input option, .soft-input option { color: #0b0b0f; }
+
+    .bh-label { @apply mb-2 block text-sm font-black text-zinc-200; }
+
+    .bh-chip {
+        @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-black;
+        border-color: rgba(255,255,255,.14);
+        background: rgba(255,255,255,.08);
+        color: #fff;
+    }
+
+    .bh-mini-card {
+        @apply rounded-[1.5rem] border p-4;
+        border-color: rgba(255,255,255,.12);
+        background: rgba(255,255,255,.08);
+    }
+
+    .bh-price { @apply text-2xl font-black; color: #ff6a2a; }
+
+    .jelly-wrap { @apply pointer-events-none absolute inset-0 overflow-hidden; }
+    .jelly-core {
+        @apply absolute rounded-full blur-[1px];
+        width: min(30rem, 70vw);
+        height: min(18rem, 45vw);
+        left: 46%;
+        top: 12%;
+        transform: translateX(-30%) rotate(-8deg);
+        background:
+            radial-gradient(circle at 35% 30%, rgba(255,255,255,.75), transparent 9%),
+            radial-gradient(circle at 42% 42%, rgba(255,75,216,.88), transparent 22%),
+            radial-gradient(circle at 70% 52%, rgba(183,43,255,.86), transparent 34%),
+            radial-gradient(circle at 54% 74%, rgba(255,53,53,.28), transparent 58%);
+        box-shadow: 0 0 70px rgba(183,43,255,.42), 0 0 140px rgba(255,53,53,.18);
+        opacity: .92;
+        filter: saturate(1.25);
+    }
+    .jelly-core::after {
+        content: "";
+        position: absolute;
+        left: 8%; right: 8%; bottom: -10%; height: 45%;
+        background: radial-gradient(ellipse at top, rgba(255,255,255,.35), transparent 66%);
+        border-radius: 50%;
+        filter: blur(8px);
+    }
+    .jelly-tentacle {
+        position: absolute;
+        top: 42%;
+        left: 55%;
+        width: 2px;
+        height: 28rem;
+        border-radius: 999px;
+        transform-origin: top center;
+        background: linear-gradient(to bottom, rgba(255,75,216,.8), rgba(183,43,255,.38), transparent);
+        box-shadow: 0 0 22px rgba(183,43,255,.35);
+        opacity: .76;
+    }
+    .jelly-tentacle:nth-child(2) { transform: rotate(12deg); height: 32rem; left: 51%; }
+    .jelly-tentacle:nth-child(3) { transform: rotate(-13deg); height: 25rem; left: 58%; }
+    .jelly-tentacle:nth-child(4) { transform: rotate(24deg); height: 23rem; left: 47%; opacity:.55; }
+    .jelly-tentacle:nth-child(5) { transform: rotate(-27deg); height: 30rem; left: 63%; opacity:.5; }
+    .jelly-tentacle:nth-child(6) { transform: rotate(4deg); height: 34rem; left: 60%; opacity:.42; }
+
+    .bh-page-hero {
+        @apply relative overflow-hidden border-b border-white/10 py-16 md:py-20;
+        background:
+            radial-gradient(circle at 24% 20%, rgba(255,53,53,.18), transparent 28rem),
+            radial-gradient(circle at 80% 8%, rgba(183,43,255,.2), transparent 24rem),
+            linear-gradient(180deg, rgba(255,255,255,.05), transparent);
+    }
+
+    .bh-table-wrap { @apply overflow-x-auto rounded-[1.5rem] border border-white/10 bg-white/[.06]; }
+    .bh-table { @apply w-full text-sm text-zinc-200; }
+    .bh-table thead { @apply bg-white/[.08] text-white; }
+    .bh-table th { @apply px-5 py-4 text-left text-xs font-black uppercase tracking-wider; }
+    .bh-table td { @apply border-t border-white/10 px-5 py-4 align-middle; }
+    .bh-table tbody tr { @apply transition hover:bg-white/[.06]; }
+}
+
+@layer utilities {
+    .hero-gradient, .hero-bg {
+        background:
+            radial-gradient(circle at 20% 18%, rgba(183,43,255,.18), transparent 28rem),
+            radial-gradient(circle at 84% 20%, rgba(255,53,53,.15), transparent 24rem),
+            linear-gradient(180deg, rgba(255,255,255,.045), transparent);
+    }
+    .admin-grid-bg {
+        background-image:
+            linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+        background-size: 28px 28px;
+    }
+    .text-balance { text-wrap: balance; }
+    [x-cloak] { display: none !important; }
+}
